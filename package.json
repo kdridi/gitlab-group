@@ -1,17 +1,28 @@
 {
   "name": "gitlab-group",
   "version": "1.0.0",
-  "description": "",
+  "description": "This small utility allow you to manage a group from a gitlab instance for a specific user",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
     "gitlab-group": "bin/gitlab-group.js"
   },
-  "author": "",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kdridi/gitlab-group.git"
+  },
+  "keywords": [
+    "gitlab",
+    "gitlab-group",
+    "gitlab-cli",
+    "cli"
+  ],
+  "author": "Karim DRIDI",
+  "license": "MIT",
   "dependencies": {
     "axios": "^0.18.0",
     "minimist": "^1.2.0"
-  }
+  },
+  "homepage": "https://github.com/kdridi/gitlab-group"
 }

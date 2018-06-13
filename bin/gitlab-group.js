@@ -10,17 +10,20 @@ const { prefix, private_token, remove, groupName } = (() => {
 	return { prefix, private_token: token, remove, groupName }
 })()
 
+const querystring = require('querystring')
 const axios = require('axios').create({
 	baseURL: `${prefix}/api/v4`,
+	timeout: 10000,
 })
 
 const gfind = () => new Promise((resolve, reject) => {
 	axios({
 		method: 'get',
-		url: '/groups',
-		param: {
+		url: `/groups?${querystring.stringify({
 			private_token,
-		},
+			owned: true,
+			per_page: 100,
+		})}`,
 	})
 	.then(({ data }) => data.filter(({ path }) => groupName === path).shift())
 	.then(group => {
@@ -34,19 +37,20 @@ const gfind = () => new Promise((resolve, reject) => {
 
 const gcreate = () => axios({
 		method: 'post',
-		url: '/groups',
-		data: {
+		url: `/groups?${querystring.stringify({
 			private_token,
 			path: groupName,
 			name: groupName,
 			visibility: 'public',
-		},
+		})}`,
 	})
 	.then(({ data }) => data)
 
 const gdelete = (id) => axios({
 		method: 'delete',
-		url: `/groups/${id}?private_token=${private_token}`,
+		url: `/groups/${id}?${querystring.stringify({
+			private_token,
+		})}`,
 	})
 	.then(() => ({ success: true }))
 

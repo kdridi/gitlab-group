@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const { prefix, private_token, remove, groupName } = (() => {
 	const args = require('minimist')(process.argv.slice(2))
 
